@@ -22,8 +22,8 @@ const logInFailed = () => {
 };
 
 const cred = {
-    username: 'myhospital',
-    password: 'hostpital'
+    username: 'amitsahu',
+    password: 'sahu'
 }
 export const logIn = (creds=cred) => (dispatch) => {
     dispatch(loggingIn());
