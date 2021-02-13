@@ -1,3 +1,11 @@
+:root{
+  --blood-red: rgb(102, 0, 0);
+  --madder-lake: rgb(199, 64, 64);
+  --pastel-pink: rgb(242, 165, 165);
+  --baby-pink: rgb(255, 204, 204);
+  --snow: rgb(248, 242, 242);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +13,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--snow) no-repeat;
+  background-size: cover;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.mybg-dark {
+  color: rgb(255, 250, 240);
+  background-color: var(--blood-red);
+}
+
+
+nav ul {
+  font-size: 110%;
+}
+
+NavLink {
+  opacity: 0.9;
+}
+
+NavLink:hover {
+  font-weight: bold;
 }
