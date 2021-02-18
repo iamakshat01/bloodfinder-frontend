@@ -25,7 +25,7 @@ const cred = {
     username: 'amitsahu',
     password: 'sahu'
 }
-export const logIn = (creds=cred) => (dispatch) => {
+export const logIn = (creds) => (dispatch) => {
     dispatch(loggingIn());
     let cat = store.getState().category.category;
     fetch(config.serverUrl+cat+'/login', {

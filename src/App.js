@@ -21,8 +21,9 @@ const mapDispatchToProps = (dispatch) => {
     setMedCategory: () => dispatch(Actions.setMedCategory()),
     setDonorCategory: () => dispatch(Actions.setDonorCategory()),
     resetCategory: () => dispatch(Actions.resetCategory()),
-    logIn : () => dispatch(Actions.logIn()),
-    logOut : () => dispatch(Actions.logOut())
+    logIn : (cred) => dispatch(Actions.logIn(cred)),
+    logOut : () => dispatch(Actions.logOut()),
+    register: (cred)=> dispatch(Actions.register(cred))
   };
 };
 
@@ -33,14 +34,14 @@ class App extends Component{
   }
 
   componentDidMount(){
-    this.props.setDonorCategory();
-    this.props.logIn();
+    this.props.setMedCategory();
+    //this.props.logIn();
   }
   render(){
     return (
       <Switch>
-        <Route path='/auth/signin' component={SignIn} />
-        <Route path='/auth/signup' component={SignUp} />
+        <Route path='/auth/signin' component={() => (<SignIn logIn={this.props.logIn} categorymed={this.props.setMedCategory} categorydonor={this.props.setDonorCategory} category={this.props.category}/> )} />
+        <Route path='/auth/signup' component={() => (<SignUp register={this.props.register} categorymed={this.props.setMedCategory} categorydonor={this.props.setDonorCategory} category={this.props.category}/> )}/>
         <Route path='/' >
           <Nav />
           <Switch>

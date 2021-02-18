@@ -30,6 +30,7 @@ const registrationFailed = () => {
 export const register = (creds) => (dispatch) => {
     dispatch(processRegistration());
     let cat = store.getState().category.category;
+    console.log(creds,"cat");
     fetch(config.serverUrl+cat+'/register', {
         method: 'POST',
         headers: {
