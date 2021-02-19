@@ -18,10 +18,13 @@ body {
 }
 
 .mybg-dark {
-  color: rgb(255, 250, 240);
+  color: var(--snow);
   background-color: var(--blood-red);
 }
 
+.mygrad {
+  background: var(--blood-red) radial-gradient(var(--snow) 0%, var(--baby-pink) 100%);
+}
 
 nav ul {
   font-size: 110%;
@@ -33,4 +36,28 @@ NavLink {
 
 NavLink:hover {
   font-weight: bold;
+}
+
+.dropdown-menu{
+  border-top: 2px solid var(--snow) !important;
+}
+
+.dropdown-item{
+  color: var(--snow);
+  background: var(--blood-red);
+}
+
+.dropdown-item:hover{
+  color: var(--blood-red) !important;
+  background: var(--snow) !important;
+}
+
+.dropdown-divider{
+  color: var(--snow)
+}
+
+.bg-grad-clip{
+  background: var(--blood-red) linear-gradient(to right bottom,var(--blood-red) 20%,var(--madder-lake) 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
