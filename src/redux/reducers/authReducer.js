@@ -2,7 +2,7 @@ import * as ActionTypes from '../actionTypes';
 
 const initialState = {
     loggingIn: false,
-    user: null,
+    user: JSON.parse(localStorage.getItem('oUser')),
     loggingOut: false
 };
 

@@ -40,6 +40,7 @@ NavLink:hover {
 
 .dropdown-menu{
   border-top: 2px solid var(--snow) !important;
+  background-color: var(--blood-red);
 }
 
 .dropdown-item{
@@ -47,6 +48,9 @@ NavLink:hover {
   background: var(--blood-red);
 }
 
+.dropdown-item.active{
+  background-color: var(--blood-red);
+}
 .dropdown-item:hover{
   color: var(--blood-red) !important;
   background: var(--snow) !important;

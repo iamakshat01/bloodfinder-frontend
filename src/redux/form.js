@@ -8,6 +8,13 @@ export const Initialsignup = {
 
 export const Initialsignin = {
     username:"",
-    password:""
+    password:"",
+    category:"donor"
 }
-  
+
+export const InitialReqGen = {
+    blood_type: "A+",
+    donors_list: [],
+    units: 1,
+    range: 1000
+}

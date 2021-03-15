@@ -66,6 +66,9 @@ class SignUp extends Component {
       case error.UNKNOWN_ERROR:
         alert("An unknown error occurred please try again after some time.");
         break;
+      default:
+        alert("An unknown error occurred please try again after some time.");
+        break;
     }
   }
   displayLocation(position) {
@@ -78,7 +81,7 @@ class SignUp extends Component {
     console.log( `Current Latitude is ${lat} and your longitude is ${lng}` );
   }
   categorychange(e){
-    if(this.props.category=="med")
+    if(this.props.category==="med")
       this.props.categorydonor();
     else
       this.props.categorymed();
@@ -111,7 +114,7 @@ class SignUp extends Component {
         blood_group:values.blood,
         birth_date:values.dob
       }
-      if(this.props.category=="med")
+      if(this.props.category==="med")
       {
         this.props.register(medOrg);
       }
@@ -291,14 +294,14 @@ class SignUp extends Component {
                   <Input
                       type="checkbox"
                       onChange={this.categorychange}
-                      checked={this.props.category=="donor"}
+                      checked={this.props.category==="donor"}
                   />{" "}
                     <strong>Register as a donor?</strong>
                     </Label>
                   </div>
                 </Col>
               </Row>
-              {this.props.category=="donor" && 
+              {this.props.category==="donor" && 
                 <Row className="form-group">
                   <Label htmlFor="blood" md={2}>
                     Blood Group
@@ -331,7 +334,7 @@ class SignUp extends Component {
                   </Col>
                 </Row>
               }
-              {this.props.category=="donor" && 
+              {this.props.category==="donor" && 
                 <Row className="form-group">
                   <Label htmlFor="dob" md={2}>
                     Date of Birth
