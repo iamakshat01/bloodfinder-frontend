@@ -1,53 +1,35 @@
 import React, { Component } from "react";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
   Button,
   Row,
   Col,
   Label,
-  Input
 } from "reactstrap";
+import {Link} from 'react-router-dom';
 import { Control, Form, Errors } from "react-redux-form";
-import { Link } from "react-router-dom";
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
-const isNumber = val => !isNaN(Number(val));
-const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.categorychange = this.categorychange.bind(this);
   }
-  categorychange(e){
-    if(this.props.category=="med")
-      this.props.categorydonor();
-    else
-      this.props.categorymed();
-  }
-  handleSubmit(values) {
 
-    const medOrg={
+  handleSubmit(values,e) {
+    const user={
         username:values.username,
-        password:values.password
-    }
-    const donor={
-        username:values.username,
-        password:values.password
-      }
-      if(this.props.category=="med")
-      {
-        this.props.logIn(medOrg);
-      }
-      else
-      {
-        this.props.logIn(donor);
-      }
+        password:values.password,
+        category:values.category,
+        history: this.props.history
+    };
+    console.log(this.props);
+    this.props.logIn(user);
+    e.preventDefault();
   }
+
   render() {
     return (
       <div className="container">
@@ -59,18 +41,29 @@ class SignIn extends Component {
         </div>
         <div className="row row-content">
           <div className="col-12 col-md-9">
-            <Form model="signin" onSubmit={values => this.handleSubmit(values)}>
+            <Form model="signin" onSubmit={(values,e) => this.handleSubmit(values,e)}>
              
-            <Row className="form-group">
-                <Col md={{ size: 6, offset: 2 }}>
+            <Row className="form-group justify-content-around">
+                <Col md={{ size: 6}} className="justify-content-center">
                   <div className="form-check">
                   <Label check>
-                  <Input
-                      type="checkbox"
-                      onChange={this.categorychange}
-                      checked={this.props.category=="donor"}
+                  <Control.radio
+                      model=".category"
+                      value="donor"
+                      checked
                   />{" "}
-                    <strong>SignIn as a donor?</strong>
+                    <strong>SignIn as a donor</strong>
+                    </Label>
+                  </div>
+                </Col>
+                <Col md={{ size: 6}} className="justify-content-center">
+                  <div className="form-check">
+                  <Label check>
+                  <Control.radio
+                      model=".category"
+                      value="med"
+                  />{" "}
+                    <strong>SignIn as a Medical Organization</strong>
                     </Label>
                   </div>
                 </Col>
@@ -132,13 +125,16 @@ class SignIn extends Component {
                 </Col>
               </Row>
               <Row className="form-group">
-                <Col md={{ size: 10, offset: 2 }}>
+                <Col md={{ size: 12 }} className="text-center">
                   <Button type="submit" color="primary">
-                    Submit
+                    SignIn
                   </Button>
                 </Col>
               </Row>
             </Form>
+            <div className="col-12 text-center">
+                    New User? <Link to="/auth/signup">Register Here</Link>
+            </div>
           </div>
         </div>
       </div>

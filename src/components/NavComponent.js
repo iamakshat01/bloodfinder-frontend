@@ -21,26 +21,26 @@ function NavItems(props){
                 <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link' to='/auth/signin'> <i className='fas fa-sign-in-alt' /> SignIn</NavLink>
             </li>);
     }
-    else if(props.user && props.category==='med'){
+    else if(props.user && props.user.category==='med'){
         items.push([
             <li className='nav-item' key='about'>
                 <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link' to='/about'> <i className='far fa-question-circle' /> About</NavLink>
             </li>,
             <li className='nav-item dropdown' key="med">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span className="rounded-circle bg-success">{props.user.name}</span>
+                    <span className="rounded-circle">{props.user.name}</span>
                 </a>
                 <div className="dropdown-menu dropdown-menu-md-right" aria-labelledby="navbarDropdown1">
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/generateRequest`} > <i class="fab fa-creative-commons-sampling"></i> Generate Request</NavLink>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/generateRequest`} > <i className="fab fa-creative-commons-sampling"></i> Generate Request</NavLink>
                     <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/requests`} > <i className='far fa-paper-plane' /> Requests</NavLink>
                     <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/profile`} > <i className='far fa-user-circle' /> Profile</NavLink>
-                    <div class="dropdown-divider"></div>
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} onClick={props.logOut} className='nav-link dropdown-item' to='/auth/signout' > SignOut</NavLink>
+                    <div className="dropdown-divider"></div>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} onClick={props.logOut} className='nav-link dropdown-item' to='/auth/signout' > <i className='fas fa-sign-out-alt' /> SignOut</NavLink>
                 </div>
             </li>
         ]);
     }
-    else if(props.user && props.category==='donor'){
+    else if(props.user && props.user.category==='donor'){
         items.push([
             <li className='nav-item' key='about'>
                 <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link' to='/about'> <i className='far fa-question-circle' /> About</NavLink>
@@ -95,7 +95,7 @@ class Navbar extends Component{
                 </button>
                 <div className='navbar-collapse collapse' id='navbar'>
                     <ul className='navbar-nav ml-auto'>
-                        <NavItems user={this.props.user} category={this.props.category} logOut={this.props.logOut} />
+                        <NavItems user={this.props.user} logOut={this.props.logOut} />
                     </ul>
                 </div>
             </div>

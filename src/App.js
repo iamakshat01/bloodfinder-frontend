@@ -9,6 +9,8 @@ import SignIn from './components/SignInComponent';
 import SignUp from './components/SignUpComponent';
 import Home from './components/HomeComponent';
 import About from './components/AboutComponent';
+import ReqGen from './components/ReqGenComponent';
+import RequestPanel from './components/RequestPanel';
 
 const mapStateToProps = (state) => {
   return {
@@ -40,13 +42,15 @@ class App extends Component{
   render(){
     return (
       <Switch>
-        <Route path='/auth/signin' component={() => (<SignIn logIn={this.props.logIn} categorymed={this.props.setMedCategory} categorydonor={this.props.setDonorCategory} category={this.props.category}/> )} />
-        <Route path='/auth/signup' component={() => (<SignUp register={this.props.register} categorymed={this.props.setMedCategory} categorydonor={this.props.setDonorCategory} category={this.props.category}/> )}/>
+        <Route path='/auth/signin' component={(props) => (<SignIn {...props} logIn={this.props.logIn}/> )} />
+        <Route path='/auth/signup' component={(props) => (<SignUp {...props} register={this.props.register}/> )}/>
         <Route path='/' >
           <Nav />
           <Switch>
             <Route path='/home' component={Home} />
             <Route path='/about' component={About} />
+            <Route path='/med/:user_id/generateRequest' component={ReqGen} />
+            <Route path='/med/:user_id/generateRequest' component={RequestPanel} />
             <Redirect to='/home' />
           </Switch>
         </Route>

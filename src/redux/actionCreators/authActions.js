@@ -1,6 +1,5 @@
 import * as ActionTypes from '../actionTypes';
 import config from '../../config';
-import store from '../storeConfig';
 
 const loggingIn = () => {
     return {
@@ -21,13 +20,9 @@ const logInFailed = () => {
     };
 };
 
-const cred = {
-    username: 'amitsahu',
-    password: 'sahu'
-}
 export const logIn = (creds) => (dispatch) => {
     dispatch(loggingIn());
-    let cat = store.getState().category.category;
+    let cat = creds.category;
     fetch(config.serverUrl+cat+'/login', {
         method: 'POST',
         headers: {
@@ -46,8 +41,12 @@ export const logIn = (creds) => (dispatch) => {
             throw error;
         }
     }).then(res => {
-        dispatch(loggedIn(res.donor));
+        dispatch(loggedIn(res.user));
+        localStorage.setItem('oUser',JSON.stringify(res.user));
+        localStorage.setItem('oToken',res.token);
         alert("LogIn Successful.");
+        creds.history.goBack();
+        
     }).catch(err => {
         dispatch(logInFailed());
         alert(err.message);
@@ -66,28 +65,10 @@ const loggedOut = () => {
     };
 };
 
-const logOutFailed = () => {
-    return {
-        type: ActionTypes.LOGGED_OUT
-    };
-};
-
 export const logOut = (category) => (dispatch) => {
     dispatch(loggingOut());
-    let cat = store.getState().category.category;
-    fetch(config.serverUrl+cat+"/logout").then(res => {
-        if(res.ok){
-            return res.json();
-        }
-        else{
-            var error = new Error("SignOut Failed!");
-            throw error;
-        }
-    }).then(res => {
-        dispatch(loggedOut());
-        alert("Signed Out Successfully!");
-    }).catch(err => {
-        dispatch(logOutFailed());
-        alert(err.message);
-    });
+    localStorage.removeItem('oToken');
+    localStorage.removeItem('oUser');
+    dispatch(loggedOut());
+    alert("Signed Out Successfully!");
 };
