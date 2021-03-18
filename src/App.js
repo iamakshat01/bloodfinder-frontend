@@ -43,7 +43,7 @@ class App extends Component{
     return (
       <Switch>
         <Route path='/auth/signin' component={(props) => (<SignIn {...props} logIn={this.props.logIn}/> )} />
-        <Route path='/auth/signup' component={(props) => (<SignUp {...props} register={this.props.register}/> )}/>
+        <Route path='/auth/signup' component={SignUp}/>
         <Route path='/' >
           <Nav />
           <Switch>

@@ -9,7 +9,10 @@ import {
   Input
 } from "reactstrap";
 import { Control, Form, Errors } from "react-redux-form";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import Actions from '../redux/actions';
+import {connect} from 'react-redux';
+
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
@@ -17,6 +20,20 @@ const minLength = len => val => val && val.length >= len;
 const isNumber = val => !isNaN(Number(val));
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 const validBgroup = val => /^(A|B|AB|O)[+-]$/i.test(val);
+
+const mapStateToProps = (state) => {
+  return {
+      category: state.category.category
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      setMedCategory: () => dispatch(Actions.setMedCategory()),
+      setDonorCategory: () => dispatch(Actions.setDonorCategory()),
+      register: (cred)=> dispatch(Actions.register(cred))
+  };
+};
 
 class SignUp extends Component {
   constructor(props) {
@@ -81,10 +98,11 @@ class SignUp extends Component {
     console.log( `Current Latitude is ${lat} and your longitude is ${lng}` );
   }
   categorychange(e){
+    //console.log('aa',this.props.category);
     if(this.props.category==="med")
-      this.props.categorydonor();
+      this.props.setDonorCategory();
     else
-      this.props.categorymed();
+      this.props.setMedCategory();
   }
   handleSubmit(values) {
 
@@ -377,4 +395,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SignUp));
