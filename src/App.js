@@ -11,6 +11,7 @@ import Home from './components/HomeComponent';
 import About from './components/AboutComponent';
 import ReqGen from './components/ReqGenComponent';
 import RequestPanel from './components/RequestPanel';
+import Inbox from './components/InboxComponent';
 
 const mapStateToProps = (state) => {
   return {
@@ -47,6 +48,7 @@ class App extends Component{
         <Route path='/' >
           <Nav />
           <Switch>
+            <Route path='/inbox' component={Inbox} />
             <Route path='/home' component={Home} />
             <Route path='/about' component={About} />
             <Route path='/med/:user_id/generateRequest' component={ReqGen} />
