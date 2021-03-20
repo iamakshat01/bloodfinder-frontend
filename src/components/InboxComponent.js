@@ -7,18 +7,41 @@ import config from '../config';
 import moment from 'moment'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import MapContainer from './MapInboxComponent'
+
+function distance(mk1, mk2) {
+    var R = 3958.8; // Radius of the Earth in miles
+    var rlat1 = mk1[0] * (Math.PI/180); // Convert degrees to radians
+    var rlat2 = mk2[0] * (Math.PI/180); // Convert degrees to radians
+    var difflat = rlat2-rlat1; // Radian difference (latitudes)
+    var difflon = (mk2[1]-mk1[1]) * (Math.PI/180); // Radian difference (longitudes)
+
+    var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
+    return `${Math.trunc(d)} km`;
+}
+
 const RenderPendingInbox = (props) => {
-        console.log(props.inbox);
+        console.log(props);
+        if(!props.inbox)
+        {
+            return(
+                <h6>No Pending Requests</h6>
+            )
+        }
         const all = props.inbox.requests.map(inbox => {
-            console.log(inbox);
+            //console.log(inbox); 
             return (
                 <div className="card w-50 mt-2 ml-2" key={inbox._id}>
-                <img className="card-img-top" src="https://docs.microsoft.com/en-us/azure/azure-maps/media/migrate-google-maps-web-app/google-maps-marker.png" alt="Card image cap"/>
+                <div style={{height:"300px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                     <div className="card-body">
-                        <h5 className="card-title">{inbox.medOrg[0].name}</h5>
-                        <p className="card-text">{moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</p>
-                        <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
-                        <button onClick={props.handleRejectClick.bind(this,inbox._id)} className="btn btn-danger ml-2">Reject</button>
+                        <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
+                        <p className="card-text">
+                            <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
+                        </p>
+                        <div className="btn-group">
+                            <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary ml-2">Accept</button>
+                            <button onClick={props.handleRejectClick.bind(this,inbox._id)} className="btn btn-danger ml-2">Reject</button>
+                        </div>
                     </div>
                 </div>
             );
@@ -34,17 +57,24 @@ const RenderPendingInbox = (props) => {
 }
 
 const RenderRejectedInbox = (props) => {
-    console.log(props.inbox);
+   // console.log(props.inbox);
+   if(!props.inbox)
+   {
+       return(
+           <h6>No Rejected Requests</h6>
+       )
+   }
     const all = props.inbox.requests.map(inbox => {
-        console.log(inbox);
+        //console.log(inbox);
         return (
             <div className="card w-50 mt-2 ml-2" key={inbox._id}>
-            <img className="card-img-top" src="https://docs.microsoft.com/en-us/azure/azure-maps/media/migrate-google-maps-web-app/google-maps-marker.png" alt="Card image cap"/>
+                <div style={{height:"250px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
-                    <h5 className="card-title">{inbox.medOrg[0].name}</h5>
-                    <p className="card-text">{moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</p>
-                    <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
-                    <button onClick={props.handleRejectClick.bind(this,inbox._id)} className="btn btn-danger ml-2">Reject</button>
+                    <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
+                    <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
+                    <div className="btn-group">
+                        <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
+                    </div>
                 </div>
             </div>
         );
@@ -60,19 +90,30 @@ const RenderRejectedInbox = (props) => {
 }
 
 const RenderAcceptedInbox = (props) => {
-    console.log(props.inbox);
+    //console.log(props.inbox);
+    if(!props.inbox)
+    {
+        return(
+            <h6>No Accepted Requests</h6>
+        )
+    }
     const all = props.inbox.requests.map(inbox => {
-        console.log(inbox);
+        //console.log(inbox.medOrg[0].location.coordinates,'location');
         return (
             <div className="card w-50 mt-2 ml-2" key={inbox._id}>
-            <img className="card-img-top" src="https://docs.microsoft.com/en-us/azure/azure-maps/media/migrate-google-maps-web-app/google-maps-marker.png" alt="Card image cap"/>
+                <div style={{height:"350px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
-                    <h5 className="card-title">{inbox.medOrg[0].name}</h5>
-                    <p className="card-text">{moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</p>
-                    <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
-                    <button onClick={props.handleRejectClick.bind(this,inbox._id)} className="btn btn-danger ml-2">Reject</button>
+                    <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
+                    <p className="card-text">
+                        <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
+                        <p><i class="fa fa-phone-square" aria-hidden="true"></i><a href={`tel:+91-${inbox.medOrg[0].phone}`}> +91-{inbox.medOrg[0].phone}</a></p>
+                    </p>
+                    <div className="btn-group">
+                        <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
+                    </div>
                 </div>
             </div>
+            
         );
     })
 
@@ -117,8 +158,8 @@ class Inbox extends Component{
       }
     }
     handleAcceptClick (reqId) {
-        console.log(reqId);
-        fetch(config.serverUrl+`donor/accept/:${reqId}`, {
+        console.log(reqId,'aaaaa');
+        fetch(config.serverUrl+`donor/accept/${reqId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -138,7 +179,7 @@ class Inbox extends Component{
         });
     }
     handleRejectClick (reqId) {
-        console.log(reqId);
+        console.log(reqId,'aaaaa');
         fetch(config.serverUrl+`donor/reject/${reqId}`, {
             method: 'GET',
             headers: {
@@ -163,6 +204,7 @@ class Inbox extends Component{
         this.props.fetchInbox();
     }
     render(){
+        console.log(this.props.inbox.inbox);
         if(this.props.inbox.inbox.fetching_inbox)
         {
             return (

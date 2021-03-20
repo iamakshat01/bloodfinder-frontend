@@ -48,9 +48,9 @@ class App extends Component{
         <Route path='/' >
           <Nav />
           <Switch>
-            <Route path='/inbox' component={Inbox} />
             <Route path='/home' component={Home} />
             <Route path='/about' component={About} />
+            <Route path='/donor/:user_id/inbox' component={Inbox} />
             <Route path='/med/:user_id/generateRequest' component={ReqGen} />
             <Route path='/med/:user_id/generateRequest' component={RequestPanel} />
             <Redirect to='/home' />
