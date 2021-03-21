@@ -10,22 +10,21 @@ import SignUp from './components/SignUpComponent';
 import Home from './components/HomeComponent';
 import About from './components/AboutComponent';
 import ReqGen from './components/ReqGenComponent';
-import RequestPanel from './components/RequestPanel';
+import Requests from './components/RequestsComponent';
+import ReqInfo from './components/ReqInfoComponent';
 
 const mapStateToProps = (state) => {
   return {
-    category: state.category.category
+    user: state.auth.user
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setMedCategory: () => dispatch(Actions.setMedCategory()),
-    setDonorCategory: () => dispatch(Actions.setDonorCategory()),
-    resetCategory: () => dispatch(Actions.resetCategory()),
     logIn : (cred) => dispatch(Actions.logIn(cred)),
     logOut : () => dispatch(Actions.logOut()),
-    register: (cred)=> dispatch(Actions.register(cred))
+    register: (cred)=> dispatch(Actions.register(cred)),
+    fetchRequests: ()=> dispatch(Actions.fetchRequests())
   };
 };
 
@@ -36,8 +35,6 @@ class App extends Component{
   }
 
   componentDidMount(){
-    this.props.setMedCategory();
-    //this.props.logIn();
   }
   render(){
     return (
@@ -49,8 +46,9 @@ class App extends Component{
           <Switch>
             <Route path='/home' component={Home} />
             <Route path='/about' component={About} />
-            <Route path='/med/:user_id/generateRequest' component={ReqGen} />
-            <Route path='/med/:user_id/generateRequest' component={RequestPanel} />
+            <Route path='/med/generateRequest' component={ReqGen} />
+            <Route path='/med/requests/:reqId' component={ReqInfo} />
+            <Route path='/med/requests' component={Requests} />
             <Redirect to='/home' />
           </Switch>
         </Route>

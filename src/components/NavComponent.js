@@ -31,9 +31,9 @@ function NavItems(props){
                     <span className="rounded-circle">{props.user.name}</span>
                 </a>
                 <div className="dropdown-menu dropdown-menu-md-right" aria-labelledby="navbarDropdown1">
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/generateRequest`} > <i className="fab fa-creative-commons-sampling"></i> Generate Request</NavLink>
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/requests`} > <i className='far fa-paper-plane' /> Requests</NavLink>
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/${props.user._id}/profile`} > <i className='far fa-user-circle' /> Profile</NavLink>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/generateRequest`} > <i className="fab fa-creative-commons-sampling"></i> Generate Request</NavLink>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/requests`} > <i className='far fa-paper-plane' /> Requests</NavLink>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/med/profile`} > <i className='far fa-user-circle' /> Profile</NavLink>
                     <div className="dropdown-divider"></div>
                     <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} onClick={props.logOut} className='nav-link dropdown-item' to='/auth/signout' > <i className='fas fa-sign-out-alt' /> SignOut</NavLink>
                 </div>
@@ -50,8 +50,8 @@ function NavItems(props){
                     <span className="rounded-circle b-2 p-2">{props.user.name}</span>
                 </a>
                 <div className="dropdown-menu dropdown-menu-md-right mybg-dark" aria-labelledby="navbarDropdown2">
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/donor/${props.user._id}/inbox`} > <i className='fas fa-inbox' /> Inbox</NavLink>
-                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/donor/${props.user._id}/profile`} > <i className='far fa-user-circle' /> Profile</NavLink>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/donor/inbox`} > <i className='fas fa-inbox' /> Inbox</NavLink>
+                    <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' to={`/donor/profile`} > <i className='far fa-user-circle' /> Profile</NavLink>
                     <div className="dropdown-divider"></div>
                     <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link dropdown-item' onClick={props.logOut} to='/auth/signout' > <i className='fas fa-sign-out-alt' /> SignOut</NavLink>
                 </div>
@@ -67,15 +67,13 @@ function NavItems(props){
 
 const mapStateToProps = (state) => {
     return {
-        category: state.category.category,
         user: state.auth.user
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logOut: () => dispatch(Actions.logOut()),
-        resetCategory: () => dispatch(Actions.resetCategory())
+        logOut: () => dispatch(Actions.logOut())
     };
 };
 
