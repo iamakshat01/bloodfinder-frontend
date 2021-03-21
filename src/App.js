@@ -10,13 +10,10 @@ import SignUp from './components/SignUpComponent';
 import Home from './components/HomeComponent';
 import About from './components/AboutComponent';
 import ReqGen from './components/ReqGenComponent';
-<<<<<<< HEAD
 import RequestPanel from './components/RequestPanel';
 import Inbox from './components/InboxComponent';
-=======
 import Requests from './components/RequestsComponent';
 import ReqInfo from './components/ReqInfoComponent';
->>>>>>> ec0de0959fb30ac60df63ea47e9be491841d4439
 
 const mapStateToProps = (state) => {
   return {
