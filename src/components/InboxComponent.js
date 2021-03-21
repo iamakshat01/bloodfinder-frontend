@@ -29,12 +29,12 @@ const RenderPendingInbox = (props) => {
             )
         }
         const all = props.inbox.requests.map(inbox => {
-            //console.log(inbox); 
+            console.log(inbox.createdAt)
             return (
-                <div className="card w-50 mt-2 ml-2" key={inbox._id}>
+                <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
                 <div style={{height:"300px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                     <div className="card-body">
-                        <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
+                        <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
                         <p className="card-text">
                             <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
                         </p>
@@ -57,7 +57,7 @@ const RenderPendingInbox = (props) => {
 }
 
 const RenderRejectedInbox = (props) => {
-   // console.log(props.inbox);
+   
    if(!props.inbox)
    {
        return(
@@ -65,12 +65,12 @@ const RenderRejectedInbox = (props) => {
        )
    }
     const all = props.inbox.requests.map(inbox => {
-        //console.log(inbox);
+        
         return (
-            <div className="card w-50 mt-2 ml-2" key={inbox._id}>
+            <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
                 <div style={{height:"250px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
-                    <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
+                    <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
                     <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
                     <div className="btn-group">
                         <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
@@ -90,7 +90,7 @@ const RenderRejectedInbox = (props) => {
 }
 
 const RenderAcceptedInbox = (props) => {
-    //console.log(props.inbox);
+    
     if(!props.inbox)
     {
         return(
@@ -98,12 +98,12 @@ const RenderAcceptedInbox = (props) => {
         )
     }
     const all = props.inbox.requests.map(inbox => {
-        //console.log(inbox.medOrg[0].location.coordinates,'location');
+       
         return (
-            <div className="card w-50 mt-2 ml-2" key={inbox._id}>
+            <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
                 <div style={{height:"350px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
-                    <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.medOrg[0].createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
+                    <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
                     <p className="card-text">
                         <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
                         <p><i class="fa fa-phone-square" aria-hidden="true"></i><a href={`tel:+91-${inbox.medOrg[0].phone}`}> +91-{inbox.medOrg[0].phone}</a></p>
@@ -158,7 +158,7 @@ class Inbox extends Component{
       }
     }
     handleAcceptClick (reqId) {
-        console.log(reqId,'aaaaa');
+        
         fetch(config.serverUrl+`donor/accept/${reqId}`, {
             method: 'GET',
             headers: {
@@ -179,7 +179,7 @@ class Inbox extends Component{
         });
     }
     handleRejectClick (reqId) {
-        console.log(reqId,'aaaaa');
+        
         fetch(config.serverUrl+`donor/reject/${reqId}`, {
             method: 'GET',
             headers: {
@@ -204,7 +204,7 @@ class Inbox extends Component{
         this.props.fetchInbox();
     }
     render(){
-        console.log(this.props.inbox.inbox);
+        
         if(this.props.inbox.inbox.fetching_inbox)
         {
             return (
@@ -260,21 +260,21 @@ class Inbox extends Component{
                             <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
                                 <Row>
-                                <Col sm="6" className="mx-auto">
+                                <Col md="4" className="mx-auto">
                                     <RenderPendingInbox inbox={this.props.inbox.inbox.find(inbox => inbox.status==="pending")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>  
                                 </Col>
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
                                 <Row>
-                                <Col sm="6" className="mx-auto">
+                                <Col md="4" className="mx-auto">
                                     <RenderAcceptedInbox inbox={this.props.inbox.inbox.find(inbox => inbox.status==="accepted")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>
                                 </Col>
                                 </Row>
                             </TabPane>
                             <TabPane tabId="3">
                                 <Row>
-                                <Col sm="6" className="mx-auto">
+                                <Col md="4" className="mx-auto">
                                     <RenderRejectedInbox inbox={this.props.inbox.inbox.find(inbox => inbox.status==="rejected")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>
                                 </Col>
                                 </Row>

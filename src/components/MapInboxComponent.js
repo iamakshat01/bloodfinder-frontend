@@ -16,7 +16,7 @@ function generateUrl(point)
     var origin = "&origin=" + tLat + "," + tLong;
     var destination = "&destination=" + latDes + "," + longDes;
     var newUrl =(url + origin + destination);
-    console.log(newUrl)
+    //console.log(newUrl)
     return newUrl
 }
 export class MapContainer extends Component {
@@ -52,7 +52,7 @@ export class MapContainer extends Component {
     }
   };
   render() {
-    console.log(this.props.point)
+    //console.log(this.props.point)
     return (
       <Map
         google={this.props.google}
