@@ -101,16 +101,14 @@ const RenderAcceptedInbox = (props) => {
        
         return (
             <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
-                <div style={{height:"350px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
+                <div style={{height:"300px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
                     <h5 className="card-title"><i class="fa fa-ambulance"></i> {inbox.medOrg[0].name} <h6 className="col-5 float-right"><i class="fa fa-clock"></i> {moment(moment(inbox.createdAt).format('YYYYMMDD'), "YYYYMMDD").fromNow()}</h6></h5>
                     <p className="card-text">
                         <p><i class="fa fa-road" aria-hidden="true"></i> {distance(inbox.medOrg[0].location.coordinates,JSON.parse(localStorage.getItem('oUser')).location.coordinates)}</p>
                         <p><i class="fa fa-phone-square" aria-hidden="true"></i><a href={`tel:+91-${inbox.medOrg[0].phone}`}> +91-{inbox.medOrg[0].phone}</a></p>
                     </p>
-                    <div className="btn-group">
-                        <button onClick={props.handleAcceptClick.bind(this,inbox._id)} className="btn btn-primary">Accept</button>
-                    </div>
+                    
                 </div>
             </div>
             
@@ -228,6 +226,11 @@ class Inbox extends Component{
                 );
             }
             else{
+                var pend=this.props.inbox.inbox.find(inbox => inbox.status==="pending")
+                if(pend)
+                pend=pend.requests.length
+                else
+                pend=0
                 return (
                     
                     <div>
@@ -237,7 +240,7 @@ class Inbox extends Component{
                                 className={classnames({ active: this.state.activeTab === '1' })}
                                 onClick={() => { this.toggle('1'); }}
                                 >
-                                Pending
+                                Pending ({pend})
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -245,7 +248,7 @@ class Inbox extends Component{
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}
                                 >
-                                Accepted
+                                Accepted 
                                 </NavLink>
                             </NavItem>
                             <NavItem>
