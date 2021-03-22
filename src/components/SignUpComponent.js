@@ -21,16 +21,10 @@ const isNumber = val => !isNaN(Number(val));
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 const validBgroup = val => /^(A|B|AB|O)[+-]$/i.test(val);
 
-const mapStateToProps = (state) => {
-  return {
-      category: state.category.category
-  };
-};
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      setMedCategory: () => dispatch(Actions.setMedCategory()),
-      setDonorCategory: () => dispatch(Actions.setDonorCategory()),
       register: (cred)=> dispatch(Actions.register(cred))
   };
 };
@@ -40,7 +34,8 @@ class SignUp extends Component {
     super(props);
     this.state = {
       latitude:'',
-      longitude:''
+      longitude:'',
+      category:'med'
     };
     console.log(props);
     this.getLocation = this.getLocation.bind(this);
@@ -99,10 +94,18 @@ class SignUp extends Component {
   }
   categorychange(e){
     //console.log('aa',this.props.category);
-    if(this.props.category==="med")
-      this.props.setDonorCategory();
+    if(this.state.category==="med")
+      {
+        this.setState({
+          category:"donor"
+        })
+      }
     else
-      this.props.setMedCategory();
+      {
+        this.setState({
+          category:"med"
+        })
+      }
   }
   handleSubmit(values) {
 
@@ -116,7 +119,8 @@ class SignUp extends Component {
         {
             type: "Point",
             coordinates: [this.state.latitude,this.state.longitude]
-        }
+        },
+        cat:"med"
     }
     const donor={
         name:values.name,
@@ -130,9 +134,10 @@ class SignUp extends Component {
             coordinates: [this.state.latitude,this.state.longitude]
         },
         blood_group:values.blood,
-        birth_date:values.dob
+        birth_date:values.dob,
+        cat:"donor"
       }
-      if(this.props.category==="med")
+      if(this.state.category==="med")
       {
         this.props.register(medOrg);
       }
@@ -312,14 +317,14 @@ class SignUp extends Component {
                   <Input
                       type="checkbox"
                       onChange={this.categorychange}
-                      checked={this.props.category==="donor"}
+                      checked={this.state.category==="donor"}
                   />{" "}
                     <strong>Register as a donor?</strong>
                     </Label>
                   </div>
                 </Col>
               </Row>
-              {this.props.category==="donor" && 
+              {this.state.category==="donor" && 
                 <Row className="form-group">
                   <Label htmlFor="blood" md={2}>
                     Blood Group
@@ -352,7 +357,7 @@ class SignUp extends Component {
                   </Col>
                 </Row>
               }
-              {this.props.category==="donor" && 
+              {this.state.category==="donor" && 
                 <Row className="form-group">
                   <Label htmlFor="dob" md={2}>
                     Date of Birth
@@ -395,4 +400,4 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SignUp));
+export default withRouter(connect(null,mapDispatchToProps)(SignUp));

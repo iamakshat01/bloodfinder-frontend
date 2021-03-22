@@ -29,7 +29,7 @@ const registrationFailed = () => {
 
 export const register = (creds) => (dispatch) => {
     dispatch(processRegistration());
-    let cat = store.getState().category.category;
+    let cat = creds.cat;
     console.log(creds,"cat");
     fetch(config.serverUrl+cat+'/register', {
         method: 'POST',
@@ -48,7 +48,7 @@ export const register = (creds) => (dispatch) => {
     }).then(res => {
         dispatch(loggedIn(res.user));
         dispatch(registrationSuccessful());
-        window.location.href(config.baseUrl+'/home');
+        window.location.href=(config.baseUrl+'/home');
     }).catch(err => {
         alert(err.message);
         dispatch(registrationFailed());
