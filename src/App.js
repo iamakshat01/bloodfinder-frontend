@@ -48,7 +48,7 @@ class App extends Component{
           <Switch>
             <Route path='/home' component={Home} />
             <Route path='/about' component={About} />
-            <Route path='/donor/:user_id/inbox' component={Inbox} />
+            <Route path='/donor/inbox' component={Inbox} />
             <Route path='/med/:user_id/generateRequest' component={ReqGen} />
             {/* <Route path='/med/:user_id/generateRequest' component={RequestPanel} /> */}
             <Route path='/med/generateRequest' component={ReqGen} />
