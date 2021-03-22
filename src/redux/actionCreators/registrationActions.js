@@ -48,8 +48,8 @@ export const register = (creds) => (dispatch) => {
         }
     }).then(res => {
         dispatch(loggedIn(res.user));
-        // localStorage.setItem('oUser',JSON.stringify(res.user));
-        // localStorage.setItem('oToken',res.token);
+        localStorage.setItem('oUser',JSON.stringify(res.user));
+        localStorage.setItem('oToken',res.token);
         dispatch(registrationSuccessful());
         window.location.href=(config.baseUrl+'/home');
     }).catch(err => {

@@ -28,8 +28,8 @@ const RenderReqs = (props) => {
     else{
         var reqDisplay = props.reqs.map(req=>{
             return (
-                <div className="col mb-4">
-                    <div className="card mt-2" key={req._id}>
+                <div className="col mb-4" key={req._id}>
+                    <div className="card mt-2">
                         <div className="card-img-top align-self-center"><h1 className="text-center p-5 bg-grad-clip">{req.blood_group}</h1></div>
                         <div className="card-body">
                             <div className="container-fluid">

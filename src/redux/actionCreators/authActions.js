@@ -45,7 +45,7 @@ export const logIn = (creds) => (dispatch) => {
         localStorage.setItem('oUser',JSON.stringify(res.user));
         localStorage.setItem('oToken',res.token);
         alert("LogIn Successful.");
-        creds.history.goBack();
+        window.location.href=(config.baseUrl+'/home');
         
     }).catch(err => {
         dispatch(logInFailed());
