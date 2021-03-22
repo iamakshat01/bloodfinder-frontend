@@ -1,6 +1,3 @@
-export const SET_CATEGORY_MED = 'SET_CATEGORY_MED';
-export const SET_CATEGORY_DONOR = 'SET_CATEGORY_DONOR';
-export const RESET_CATEGORY = 'RESET_CATEGORY';
 
 export const LOGGING_IN = 'LOGGING_IN';
 export const LOGGED_IN = 'LOGGED_IN';
