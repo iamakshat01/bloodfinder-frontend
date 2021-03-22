@@ -1,6 +1,6 @@
 import React from 'react';
 
-const About = () =>{
+const Loading = () => {
     return (
         <div className="container align-items-center justify-content-center" style={{height: "80vh"}}>
             <div className="row justify-content-center align-items-center h-100">
@@ -13,4 +13,4 @@ const About = () =>{
     );
 };
 
-export default About;
+export default Loading;
