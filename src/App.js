@@ -10,8 +10,13 @@ import SignUp from './components/SignUpComponent';
 import Home from './components/HomeComponent';
 import About from './components/AboutComponent';
 import ReqGen from './components/ReqGenComponent';
+<<<<<<< HEAD
+import RequestPanel from './components/RequestPanel';
+import Inbox from './components/InboxComponent';
+=======
 import Requests from './components/RequestsComponent';
 import ReqInfo from './components/ReqInfoComponent';
+>>>>>>> ec0de0959fb30ac60df63ea47e9be491841d4439
 
 const mapStateToProps = (state) => {
   return {
@@ -46,9 +51,15 @@ class App extends Component{
           <Switch>
             <Route path='/home' component={Home} />
             <Route path='/about' component={About} />
+<<<<<<< HEAD
+            <Route path='/donor/:user_id/inbox' component={Inbox} />
+            <Route path='/med/:user_id/generateRequest' component={ReqGen} />
+            <Route path='/med/:user_id/generateRequest' component={RequestPanel} />
+=======
             <Route path='/med/generateRequest' component={ReqGen} />
             <Route path='/med/requests/:reqId' component={ReqInfo} />
             <Route path='/med/requests' component={Requests} />
+>>>>>>> ec0de0959fb30ac60df63ea47e9be491841d4439
             <Redirect to='/home' />
           </Switch>
         </Route>
