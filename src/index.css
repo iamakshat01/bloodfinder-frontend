@@ -65,3 +65,11 @@ NavLink:hover {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.myBgSide{
+  background: url("./MyBackground.png");
+  background-size: auto 100%;
+  background-position-x: right;
+  background-position-y: top;
+  background-repeat: no-repeat;
+}
