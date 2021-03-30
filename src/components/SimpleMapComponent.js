@@ -10,14 +10,14 @@ const RenderMarkers = (props) => {
     else{
         var markers = props.locations.map(location => {
             return (
-                <Marker key={location._id} {...props} title={location.username} position={{lat: location.lat, lng: location.lng}} />
+                <Marker key={location.username} title={location.username} position={{lat: location.lat, lng: location.lng}} />
             );
         });
         return markers;
     }
 }
 
-class MyMap extends Component{
+class SimpleMap extends Component{
 
     constructor(props){
         super(props);
@@ -36,9 +36,7 @@ class MyMap extends Component{
                 center={cent}
                 className={'map'}
                 zoom={5}>
-                <RenderMarkers locations={this.props.accLocations || []} accepted={true} />
-                <RenderMarkers locations={this.props.penLocations || []} pending={true} />
-                <RenderMarkers locations={this.props.rejLocations || []} rejected={true} />
+                <RenderMarkers locations={this.props.markerLocations || []} />
                 <RenderMarkers locations={[this.props.center]} />
             </Map>
         );
@@ -47,4 +45,4 @@ class MyMap extends Component{
 
 export default GoogleApiWrapper({
     apiKey: "AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
-})(MyMap);
+})(SimpleMap);
