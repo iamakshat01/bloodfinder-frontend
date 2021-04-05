@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import myActions from '../redux/actions';
 import ErrorComponent from './ErrorComponent';
 import MapComponent from './MapComponent';
+import Loading from './LoadingComponent';
 
 const mapStateToProps = (state) => {
     return {
@@ -87,17 +88,11 @@ class ReqInfo extends Component{
         else{
             if(this.props.reqInfo.reqInfo_loading){
                 return (
-                    <div className="container">
-                        <div className="container-fluid align-items-center justify-content center" style={{height: "80vh"}}>
-                            <div className="d-flex text-center">
-                                <i className="fas fa-spinner fa-l fa-pulse d-flex"></i>
-                                <h3 className="d-flex">Loading</h3>
-                            </div>
-                        </div>
-                    </div>
+                    <Loading />
                 );
             }
             else if(this.props.reqInfo.reqInfo_failed){
+                this.props.history.goBack();
                 return (
                     <div className="container">
                         <div className="container-fluid align-items-center justify-content center" style={{height: "80vh"}}>

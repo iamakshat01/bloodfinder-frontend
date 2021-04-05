@@ -14,6 +14,7 @@ import ReqGen from './components/ReqGenComponent';
 import Inbox from './components/InboxComponent';
 import Requests from './components/RequestsComponent';
 import ReqInfo from './components/ReqInfoComponent';
+import Profile from './components/ProfileComponent';
 
 const mapStateToProps = (state) => {
   return {
@@ -52,6 +53,7 @@ class App extends Component{
             <Route path='/med/:user_id/generateRequest' component={ReqGen} />
             {/* <Route path='/med/:user_id/generateRequest' component={RequestPanel} /> */}
             <Route path='/med/generateRequest' component={ReqGen} />
+            <Route path='/:cat/profile' component={Profile} />
             <Route path='/med/requests/:reqId' component={ReqInfo} />
             <Route path='/med/requests' component={Requests} />
             <Redirect to='/home' />
