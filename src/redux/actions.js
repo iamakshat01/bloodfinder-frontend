@@ -1,4 +1,4 @@
-
+import * as errorActions from './actionCreators/errorActions'
 import * as authActions from './actionCreators/authActions';
 import * as registrationActions from './actionCreators/registrationActions';
 import * as donorActions from './actionCreators/donorActions';
@@ -13,7 +13,8 @@ const actions = {
     ...donorActions,
     ...inboxActions,
     ...requestActions,
-    ...reqInfoActions
+    ...reqInfoActions,
+    ...errorActions
 };
 
 export default actions;

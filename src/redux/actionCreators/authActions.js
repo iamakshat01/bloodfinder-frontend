@@ -1,5 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 import config from '../../config';
+import { addError, removeError } from './errorActions';
 
 const loggingIn = () => {
     return {
@@ -37,19 +38,21 @@ export const logIn = (creds) => (dispatch) => {
         if(res.ok)
             return res.json();
         else{
-            var error = new Error("SignIn Failed !");
+            var error = new Error("Invalid Username or Password !");
             throw error;
         }
     }).then(res => {
+        dispatch(removeError());
         dispatch(loggedIn(res.user));
         localStorage.setItem('oUser',JSON.stringify(res.user));
         localStorage.setItem('oToken',res.token);
-        alert("LogIn Successful.");
+        //alert("LogIn Successful.");
         window.location.href=(config.baseUrl+'/home');
         
     }).catch(err => {
+        dispatch(addError(err.message));
         dispatch(logInFailed());
-        alert(err.message);
+        //alert(err.message);
     });
 };
 

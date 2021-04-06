@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import config from '../../config';
+import { addError, removeError } from './errorActions';
 
 const fetchingRequests = () =>{
     return {
@@ -36,9 +37,11 @@ export const fetchRequests = () => (dispatch) => {
     })
     .then(res => {
         if(res.ok){
+            dispatch(removeError());
             return res.json();
         }
         else{
+            dispatch(addError("Could not fetch requests."))
             var err=new Error("Could not fetch requests.")
             err.status=res.status;
             throw err;
@@ -49,7 +52,7 @@ export const fetchRequests = () => (dispatch) => {
     })
     .catch(err => {
         dispatch(requestsFailed());
-        alert(err.message);
+        //alert(err.message);
     });
 };
 
