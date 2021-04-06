@@ -32,6 +32,7 @@ class SignIn extends Component {
 
   render() {
     return (
+      <div className="img-bg">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -137,6 +138,7 @@ class SignIn extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

@@ -5,6 +5,16 @@ import {withRouter} from 'react-router-dom';
 import myActions from '../redux/actions';
 import config from '../config';
 
+const ErrorComponent = (props) => {
+    return (
+        <div className="toast" role="alert" aria-live="polite" aria-atomic="true" data-delay="10000">
+            <div role="alert" aria-live="assertive" aria-atomic="true">
+                {props.children}
+            </div>
+        </div>
+    );
+};
+
 const chkChange =(model,value) => (dispatch) =>{
     return dispatch(actions.xor(model,value));
 };
@@ -64,7 +74,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDonors : (props) => dispatch(myActions.fetchDonors(props)),
-        resetDonors : () => {dispatch(myActions.donorReset()); dispatch(actions.setInitial("reqgen.donors_list"));}
+        resetDonors : () => {dispatch(myActions.donorReset())},
+        setInitial : () => {dispatch(actions.setInitial("reqgen.donors_list[]"))}
     };
 }
 
@@ -85,6 +96,7 @@ class ReqGen extends Component{
         this.findRef=React.createRef();
         this.handleSubmit=this.handleSubmit.bind(this);
         this.props.resetDonors();
+        this.props.setInitial();
     }
 
     handleDonors(){
@@ -133,19 +145,24 @@ class ReqGen extends Component{
         this.editRef.current.classList.add("d-none");
         this.findRef.current.classList.remove("d-none");
         this.props.resetDonors();
+        this.props.setInitial();
     }
 
     componentDidMount(){
         this.props.resetDonors();
+        this.props.setInitial();
     }
+
     render(){
         return (
+            <div className="img-bg">
             <div className="container">
                 <div className="col-12">
                     <h1>Request Generation</h1>
                 </div>
-                <div className="container-fluid rounded mygrad p-3">
-                    <Form model="reqgen" onSubmit={this.handleSubmit} validators={{donors_list: {arrLen: (value) => value.length>=5 || value.length===this.props.donors.donors.length}}}>
+                <div className="container-fluid rounded p-3">
+                    <Form model="reqgen" onSubmit={this.handleSubmit} validators={{"": {hasDonors: ({donors_list}) => donors_list.length>0,
+                    validLength: (value) => value.donors_list.length >= value.units}}}>
                         <div className="form-group row">
                             <label htmlFor="blood_type" className="col-md-3 offset-md-2 col-form-label">
                                 Blood Type:
@@ -192,12 +209,14 @@ class ReqGen extends Component{
                         <div className="form-group row p-2">
                                 <RenderDonors donors={this.props.donors}></RenderDonors>
                         </div>
-                        <Errors model=".donors_list[]" messages={ {arrLen : "Select atleast 5 donors." }} show={(!this.editable && this.props.donors.donors.length>5)} />
+                        <Errors model="reqgen" component={ErrorComponent} messages={ {hasDonors : "No Donors Selected!!!",
+                        validLength : (value) => `Minumum number of donors to be selected: ${value.units}`}} show={{touched: true, focus: false}} />
                         <div className="form-group row p-2 justify-content-center">
                                 <button type="submit" className="btn btn-primary" disabled={this.editable}>Submit</button>
                         </div>
                     </Form>
                 </div>
+            </div>
             </div>
         );
     }

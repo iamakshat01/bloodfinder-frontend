@@ -149,6 +149,7 @@ class SignUp extends Component {
 
   render() {
     return (
+      <div className="img-bg">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -395,6 +396,7 @@ class SignUp extends Component {
             </Form>
           </div>
         </div>
+      </div>
       </div>
     );
   }

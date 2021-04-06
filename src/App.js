@@ -10,7 +10,6 @@ import SignUp from './components/SignUpComponent';
 import Home from './components/HomeComponent';
 import About from './components/AboutComponent';
 import ReqGen from './components/ReqGenComponent';
-// import RequestPanel from './components/RequestPanel';
 import Inbox from './components/InboxComponent';
 import Requests from './components/RequestsComponent';
 import ReqInfo from './components/ReqInfoComponent';
