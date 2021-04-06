@@ -6,9 +6,11 @@ import { InitialReqGen, Initialsignin, Initialsignup } from './form';
 import inboxReducer from './reducers/inboxReducer';
 import requestsReducer from './reducers/requestsReducer';
 import reqInfoReducer from './reducers/reqInfoReducer';
+import errorReducer from './reducers/errorReducer'
 
 const rootReducer = combineReducers({
    
+    error:errorReducer,
     auth: authReducer,
     donors: donorsReducer,
     inbox: inboxReducer,

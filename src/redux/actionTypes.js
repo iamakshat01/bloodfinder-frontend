@@ -1,3 +1,5 @@
+export const ADD_ERROR = 'ADD_ERROR';
+export const REMOVE_ERROR = 'REMOVE_ERROR';
 
 export const LOGGING_IN = 'LOGGING_IN';
 export const LOGGED_IN = 'LOGGED_IN';

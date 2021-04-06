@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
-const Error = (props) => {
-    return (
-        <div className="container-fluid text-center">
-            <h1>{props.errMess?props.errMess:"Oops!!! Something Went Wrong!"}</h1>
-        </div>
-    )
-};
+const Error = ({ error }) => (
+  <Fragment>
+    {error.message && <div className="alert alert-danger">{error.message}</div>}
+  </Fragment>
+);
 
-export default Error;
+export default connect(store => ({ error: store.error }))(Error);

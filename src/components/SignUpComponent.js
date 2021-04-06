@@ -148,11 +148,15 @@ class SignUp extends Component {
   }
 
   render() {
+    const style = {
+      color: 'rgb(102, 0, 0)',
+      fontSize: 27
+    };
     return (
       <div className="container">
-        <div className="row">
+        <div className="row mt-4">
           <div className="col-12">
-            <h3>SignUp</h3>
+            <h3 style={style}>Sign Up</h3>
             <hr />
           </div>
         </div>

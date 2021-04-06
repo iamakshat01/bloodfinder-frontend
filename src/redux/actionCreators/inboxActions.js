@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 import config from '../../config';
-
+import { addError, removeError } from './errorActions';
 
 
 const fetchingInbox = () => {
@@ -40,10 +40,12 @@ export const fetchInbox = (props) => (dispatch) => {
             throw error;
         }
     }).then(res=>{
+        dispatch(removeError());
         //console.log(res);
         dispatch(inboxFetched(res.inbox));
     }).catch(err => {
         dispatch(inboxFailed());
-        alert("Couldn't fetch inbox!");
+        dispatch(addError("Couldn't fetch inbox!"))
+        //alert("");
     });
 }

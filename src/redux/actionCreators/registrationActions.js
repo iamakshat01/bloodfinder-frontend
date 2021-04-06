@@ -1,6 +1,7 @@
 import * as ActionTypes from '../actionTypes';
 import store from '../storeConfig';
 import config from '../../config';
+import { addError, removeError } from './errorActions';
 
 const processRegistration = () => {
     return {
@@ -50,10 +51,11 @@ export const register = (creds) => (dispatch) => {
         dispatch(loggedIn(res.user));
         localStorage.setItem('oUser',JSON.stringify(res.user));
         localStorage.setItem('oToken',res.token);
+        dispatch(removeError());
         dispatch(registrationSuccessful());
         window.location.href=(config.baseUrl+'/home');
     }).catch(err => {
-        alert(err.message);
+        dispatch(addError(err.message));
         dispatch(registrationFailed());
     });
 };
