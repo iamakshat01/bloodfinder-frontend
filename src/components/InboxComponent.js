@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 import myActions from '../redux/actions';
 import config from '../config';
 import moment from 'moment'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Alert } from 'reactstrap';
 import classnames from 'classnames';
 import MapContainer from './MapInboxComponent'
 
@@ -31,6 +31,7 @@ const RenderPendingInbox = (props) => {
         const all = props.inbox.requests.map(inbox => {
             console.log(inbox.createdAt)
             return (
+                <>
                 <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
                 <div style={{height:"300px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                     <div className="card-body">
@@ -44,11 +45,13 @@ const RenderPendingInbox = (props) => {
                         </div>
                     </div>
                 </div>
+                </>
             );
         })
 
         return (
             <div className="container-fluid">
+                 {props.msg && <div className="accmsg alert alert-primary">{props.msg}</div>}
                 <div className="row justify-content-center">
                 {all}
                 </div>
@@ -67,6 +70,8 @@ const RenderRejectedInbox = (props) => {
     const all = props.inbox.requests.map(inbox => {
         
         return (
+            <>
+            
             <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
                 <div style={{height:"250px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
@@ -77,11 +82,13 @@ const RenderRejectedInbox = (props) => {
                     </div>
                 </div>
             </div>
+            </>
         );
     })
 
     return (
         <div className="container-fluid">
+            {props.msg && <div className="accmsg alert alert-primary">{props.msg}</div>}
             <div className="row justify-content-center">
             {all}
             </div>
@@ -100,6 +107,8 @@ const RenderAcceptedInbox = (props) => {
     const all = props.inbox.requests.map(inbox => {
        
         return (
+            <>
+           
             <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>
                 <div style={{height:"300px"}}><MapContainer point={inbox.medOrg[0].location.coordinates} /></div>
                 <div className="card-body">
@@ -111,12 +120,13 @@ const RenderAcceptedInbox = (props) => {
                     
                 </div>
             </div>
-            
+           </>
         );
     })
 
     return (
         <div className="container-fluid">
+             {props.msg && <div className=" accmsg alert alert-primary">{props.msg}</div>}
             <div className="row justify-content-center">
             {all}
             </div>
@@ -142,8 +152,10 @@ class Inbox extends Component{
     constructor(props){
         super(props);
         this.state={
-            activeTab:'1'
+            activeTab:'1',
         }
+        this.handleAcceptClick=this.handleAcceptClick.bind(this);
+        this.handleRejectClick=this.handleRejectClick.bind(this);
     }
 
     toggle (tab) {
@@ -165,7 +177,10 @@ class Inbox extends Component{
             }
         }).then(res=>{
             if(res.ok){
-                alert("Request has been accepted.");
+                this.props.fetchInbox();
+                this.setState({
+                    activeTab:'2'
+                })
             }
             else{
                 var err=new Error(res.statusText);
@@ -186,6 +201,10 @@ class Inbox extends Component{
             }
         }).then(res=>{
             if(res.ok){
+                this.props.fetchInbox();
+                this.setState({
+                    activeTab:'3'
+                })
                 alert("Request has been rejected.");
             }
             else{
@@ -202,7 +221,10 @@ class Inbox extends Component{
         this.props.fetchInbox();
     }
     render(){
-        
+        const style = {
+            color: 'rgb(102, 0, 0)',
+            fontSize: 17
+        };
         if(this.props.inbox.inbox.fetching_inbox)
         {
             return (
@@ -238,6 +260,7 @@ class Inbox extends Component{
                                 <NavLink
                                 className={classnames({ active: this.state.activeTab === '1' })}
                                 onClick={() => { this.toggle('1'); }}
+                                style={style}
                                 >
                                 Pending ({pend})
                                 </NavLink>
@@ -246,6 +269,7 @@ class Inbox extends Component{
                                 <NavLink
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}
+                                style={style}
                                 >
                                 Accepted 
                                 </NavLink>
@@ -254,6 +278,7 @@ class Inbox extends Component{
                                 <NavLink
                                 className={classnames({ active: this.state.activeTab === '3' })}
                                 onClick={() => { this.toggle('3'); }}
+                                style={style}
                                 >
                                 Rejected
                                 </NavLink>
@@ -263,21 +288,21 @@ class Inbox extends Component{
                             <TabPane tabId="1">
                                 <Row>
                                 <Col md="4" className="mx-auto">
-                                    <RenderPendingInbox inbox={this.props.inbox.inbox.find(inbox => inbox.status==="pending")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>  
+                                    <RenderPendingInbox msg={this.state.msg} inbox={this.props.inbox.inbox.find(inbox => inbox.status==="pending")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>  
                                 </Col>
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
                                 <Row>
                                 <Col md="4" className="mx-auto">
-                                    <RenderAcceptedInbox inbox={this.props.inbox.inbox.find(inbox => inbox.status==="accepted")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>
+                                    <RenderAcceptedInbox msg={this.state.msg} inbox={this.props.inbox.inbox.find(inbox => inbox.status==="accepted")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>
                                 </Col>
                                 </Row>
                             </TabPane>
                             <TabPane tabId="3">
                                 <Row>
                                 <Col md="4" className="mx-auto">
-                                    <RenderRejectedInbox inbox={this.props.inbox.inbox.find(inbox => inbox.status==="rejected")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>
+                                    <RenderRejectedInbox msg={this.state.msg} inbox={this.props.inbox.inbox.find(inbox => inbox.status==="rejected")} handleAcceptClick={this.handleAcceptClick} handleRejectClick={this.handleRejectClick}/>
                                 </Col>
                                 </Row>
                             </TabPane>

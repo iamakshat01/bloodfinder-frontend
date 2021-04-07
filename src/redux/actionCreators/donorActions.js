@@ -1,5 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 import config from '../../config';
+import { addError, removeError } from './errorActions';
 
 export const donorReset = () => {
     return {
@@ -40,6 +41,7 @@ export const fetchDonors = (props) => (dispatch) => {
         })
     }).then(res=> {
         if(res.ok){
+            dispatch(removeError());
             return res.json();
         }
         else{
@@ -51,6 +53,7 @@ export const fetchDonors = (props) => (dispatch) => {
         dispatch(donorsFetched(res.availdonors));
     }).catch(err => {
         dispatch(donorsFailed());
-        alert("Couldn't fetch donors!");
+        dispatch(addError("Couldn't fetch donors!"))
+        //alert();
     });
 }

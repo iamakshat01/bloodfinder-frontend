@@ -7,6 +7,7 @@ import {
 } from "reactstrap";
 import {Link} from 'react-router-dom';
 import { Control, Form, Errors } from "react-redux-form";
+import Error from './ErrorComponent'
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
@@ -31,21 +32,27 @@ class SignIn extends Component {
   }
 
   render() {
+    const style = {
+      color: 'rgb(102, 0, 0)',
+      fontSize: 27
+    };
     return (
       <div className="img-bg">
       <div className="container">
         <div className="row">
-          <div className="col-12">
-            <h3>SignIn</h3>
+          <div className="col-12 mt-4">
+            <h3 style={style}>Sign In</h3>
             <hr />
           </div>
         </div>
+        
         <div className="row row-content">
+          
           <div className="col-12 col-md-9">
             <Form model="signin" onSubmit={(values,e) => this.handleSubmit(values,e)}>
              
-            <Row className="form-group justify-content-around">
-                <Col md={{ size: 6}} className="justify-content-center">
+            <Row className="form-group">
+                <Col md={6}>
                   <div className="form-check">
                   <Label check>
                   <Control.radio
@@ -53,23 +60,24 @@ class SignIn extends Component {
                       value="donor"
                       checked
                   />{" "}
-                    <strong>SignIn as a donor</strong>
+                    <strong>Sign In as a Donor</strong>
                     </Label>
                   </div>
                 </Col>
-                <Col md={{ size: 6}} className="justify-content-center">
+                <Col md={6} className="justify-content-center">
                   <div className="form-check">
                   <Label check>
                   <Control.radio
                       model=".category"
                       value="med"
                   />{" "}
-                    <strong>SignIn as a Medical Organization</strong>
+                    <strong>Sign In as a Medical Organization</strong>
                     </Label>
                   </div>
                 </Col>
               </Row>
-              <Row className="form-group">
+              <Error/>
+              <Row className="form-group mt-3">
                 <Label htmlFor="username" md={2}>
                    Username
                 </Label>
