@@ -20,8 +20,6 @@ Donors may choose to take up or reject a request. Based on which if he/she choos
 
 ## 1. Frontend
 
-1. All **required** frontend designs are built and are available on different routes (Some of them are still to be integrated with the backend for funcionality). All designs are available here on this [link](https://xd.adobe.com/view/569ca051-2561-4693-b97b-35a37b8b8b4c-03cf/). These designs include the following:
-
    - Landing Page
    - Login/Signup Page
    - Profile Page
@@ -31,7 +29,7 @@ Donors may choose to take up or reject a request. Based on which if he/she choos
 
 2. User Authentication has been integrated into the frontend.
 3. Maps API has been integrated into the frontend.
-4. Navgation has been setup and is in working state.
+
 
 
 # Technologies and Packages Used
@@ -60,9 +58,9 @@ Clone the frontend and backend repositories, cd into them individually, and then
 
 ## 1. Frontend
 
-1. Run `npm install`.
+1. Run `yarn install`.
 2. Generate your Map API key using this [link](https://console.cloud.google.com/google/maps-apis/overview?pli=1) and replace it with the keys in index.html & Map.js files of frontend.
-3. Change backend port in App.js file if you change it in backend, by default the backend is setup to run on port 8000.
+3. Change backend port in App.js file if you change it in backend, by default the backend is setup to run on port 3000.
 
 ## 2. Backend
 
