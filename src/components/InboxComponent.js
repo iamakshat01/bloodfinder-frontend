@@ -228,7 +228,7 @@ class Inbox extends Component{
         if(this.props.inbox.inbox.fetching_inbox)
         {
             return (
-                <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+                <div className="w-100 img-bg h-100 d-flex justify-content-center align-items-center">
                     <div className="text-center">
                     <i className="fas fa-spinner fa-pulse"></i><br/>
                     Loading
@@ -240,7 +240,7 @@ class Inbox extends Component{
         {
             if(this.props.inbox.inbox.length === 0){
                 return (
-                    <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+                    <div className="w-100 img-bg h-100 d-flex justify-content-center align-items-center">
                         <div className="text-center">
                             No Requests to display.
                         </div>
@@ -254,8 +254,7 @@ class Inbox extends Component{
                 else
                 pend=0
                 return (
-                    
-                    <div>
+                    <div className="img-bg">
                             <Nav tabs className="mt-5 justify-content-center" >
                             <NavItem >
                                 <NavLink
@@ -309,8 +308,6 @@ class Inbox extends Component{
                             </TabPane>
                             </TabContent>
                     </div>
-
-                   
                 );
             }
         }

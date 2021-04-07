@@ -178,6 +178,7 @@ class ReqInfo extends Component{
                     })
                 }
                 return (
+                    <div className="img-bg">
                     <div className="container mt-2 p-2">
                         <div className="row">
                         <nav aria-label="breadcrumb">
@@ -260,6 +261,7 @@ class ReqInfo extends Component{
                                 <MapComponent center={center} accLocations={accLocations} penLocations={penLocations} rejLocations={rejLocations} google={window.google}/>
                             </div>
                         </div>
+                    </div>
                     </div>
                 );
             }

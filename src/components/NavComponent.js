@@ -17,6 +17,9 @@ function NavItems(props){
             <li className='nav-item' key='about'>
                 <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link' to='/about'> <i className='far fa-question-circle' /> About</NavLink>
             </li>,
+            <li className='nav-item' key='signup'>
+                <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link' to='/auth/signup'> <i className='fas fa-id-card' /> Register</NavLink>
+            </li>,
             <li className='nav-item' key='signin'>
                 <NavLink  activeStyle={{color: 'floralwhite', fontWeight: 'bold', textShadow: 'black 0px 1px'}} className='nav-link' to='/auth/signin'> <i className='fas fa-sign-in-alt' /> SignIn</NavLink>
             </li>);

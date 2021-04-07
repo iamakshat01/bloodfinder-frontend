@@ -95,7 +95,7 @@ class Requests extends Component{
         else{
             if(this.props.reqs.reqFailed){
                 return (
-                    <div className="container">
+                    <div className="container-fluid img-bg">
                         <ErrorComponent />
                     </div>
                 );
@@ -108,7 +108,8 @@ class Requests extends Component{
                         return req.status==='closed'
                     });
                     return (
-                        <div className="container bg-white">
+                        <div className="img-bg">
+                        <div className="container">
                             <div className="row justify-content-center">
                                 <h1>Requests Panel</h1>
                             </div>
@@ -130,6 +131,7 @@ class Requests extends Component{
                                 </div>
                             </div>
                             </div>
+                        </div>
                         </div>
                     );
             }

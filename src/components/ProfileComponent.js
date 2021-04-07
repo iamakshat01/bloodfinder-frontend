@@ -27,6 +27,7 @@ class Profile extends Component{
                 lng: user.location[0]
             }
             return (
+                <div className="img-bg">
                 <div className="container" style={{minHeight: "80vh"}}>
                     <div className="row mt-2 justify-content-center">
                         <h1>Profile</h1>
@@ -39,7 +40,7 @@ class Profile extends Component{
                             <h3>
                                 User Information:
                             </h3>
-                            <div className="card myBgSide">
+                            <div className="card">
                                 <div className="card-body">
                                     <div className="container-fluid">
                                         <dl className="row">
@@ -110,6 +111,7 @@ class Profile extends Component{
                     <div className="row">
                     
                     </div>
+                </div>
                 </div>
             )
         }

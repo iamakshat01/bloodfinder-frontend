@@ -37,6 +37,7 @@ class SignIn extends Component {
       fontSize: 27
     };
     return (
+      <div className="img-bg">
       <div className="container">
         <div className="row">
           <div className="col-12 mt-4">
@@ -145,6 +146,7 @@ class SignIn extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }
