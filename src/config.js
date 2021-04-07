@@ -1,6 +1,6 @@
 const config = {
-    serverUrl: 'http://localhost:3000/',
-    baseUrl: 'http://localhost:3001/'
+    serverUrl: 'https://ofactorapi.herokuapp.com/',
+    baseUrl: 'https://ofactor.netlify.app'
 };
 
 export default config;
