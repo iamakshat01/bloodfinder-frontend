@@ -31,7 +31,7 @@ const registrationFailed = () => {
 export const register = (creds) => (dispatch) => {
     dispatch(processRegistration());
     let cat = creds.cat;
-    console.log(creds,"cat");
+    //console.log(creds,"cat");
     delete creds.cat
     fetch(config.serverUrl+cat+'/register', {
         method: 'POST',

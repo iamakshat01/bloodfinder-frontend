@@ -24,7 +24,7 @@ class MyMap extends Component{
     }
 
     render(){
-        console.log(this.props);
+        //console.log(this.props);
         var cent = {
                 lat: this.props.center.lat,
                 lng: this.props.center.lng

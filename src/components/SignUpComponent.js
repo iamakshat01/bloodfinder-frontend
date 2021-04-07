@@ -37,7 +37,7 @@ class SignUp extends Component {
       longitude:'',
       category:'med'
     };
-    console.log(props);
+    //console.log(props);
     this.getLocation = this.getLocation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.locfunc = this.locfunc.bind(this);
@@ -90,7 +90,7 @@ class SignUp extends Component {
       latitude: lat,
       longitude: lng
     })
-    console.log( `Current Latitude is ${lat} and your longitude is ${lng}` );
+    //console.log( `Current Latitude is ${lat} and your longitude is ${lng}` );
   }
   categorychange(e){
     //console.log('aa',this.props.category);

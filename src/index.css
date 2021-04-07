@@ -88,4 +88,8 @@ NavLink:hover {
   background-repeat: no-repeat;
 }
 
+.navbar-brand {
+  font-size: 25px;
+}
+
 

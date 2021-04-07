@@ -90,7 +90,7 @@ class Navbar extends Component{
         return (
             <nav className='navbar container-fluid navbar-expand-md navbar-dark mybg-dark'>
             <div className='container-fluid'>
-                <Link className='navbar-brand' to='/home'>Logo</Link>
+                <Link className='navbar-brand' to='/home'><i className="fas fa-tint"></i>-FACTOR</Link>
                 <button type="button" className='navbar-toggler' data-target='#navbar' data-toggle='collapse'>
                     <span className='navbar-toggler-icon'></span>
                 </button>

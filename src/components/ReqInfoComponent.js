@@ -77,7 +77,7 @@ const RenderDonors = (props) => {
 class ReqInfo extends Component{
     constructor(props){
         super(props);
-        console.log("Const");
+        //console.log("Const");
         this.props.fetchReqInfo(this.props.match.params.reqId);
     }
 

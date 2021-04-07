@@ -26,7 +26,7 @@ class SignIn extends Component {
         category:values.category,
         history: this.props.history
     };
-    console.log(this.props);
+    //console.log(this.props);
     this.props.logIn(user);
     e.preventDefault();
   }

@@ -21,7 +21,7 @@ function distance(mk1, mk2) {
 }
 
 const RenderPendingInbox = (props) => {
-        console.log(props);
+        //console.log(props);
         if(!props.inbox)
         {
             return(
@@ -29,7 +29,7 @@ const RenderPendingInbox = (props) => {
             )
         }
         const all = props.inbox.requests.map(inbox => {
-            console.log(inbox.createdAt)
+            //console.log(inbox.createdAt)
             return (
                 <>
                 <div className="card w-100 mt-2 ml-2 mr-2" key={inbox._id}>

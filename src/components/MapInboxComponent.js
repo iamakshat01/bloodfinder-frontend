@@ -33,7 +33,7 @@ export class MapContainer extends Component {
       this.mapClicked=this.mapClicked.bind(this);
   }
   mapClicked(mapProps, map, clickEvent) {
-    console.log(generateUrl(this.props.point))
+    //console.log(generateUrl(this.props.point))
     window.location.href=(generateUrl(this.props.point));
   }
   onMarkerClick = (props, marker, e) =>
